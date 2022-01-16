@@ -90,16 +90,12 @@ const Signup = () => {
   // ];
 
   const names = [
-    { id: 1, value: "Oliver Hansen" },
-    { id: 2, value: "Van Henry" },
-    { id: 3, value: "April Tucker" },
-    { id: 4, value: "Ralph Hubbard" },
-    { id: 5, value: "Omar Alexander" },
-    { id: 6, value: "Carlos Abbott" },
-    { id: 7, value: "Miriam Wagner" },
-    { id: 8, value: "Bradley Wilkerson" },
-    { id: 9, value: "Virginia Andrews" },
-    { id: 10, value: "Kelly Snyder" },
+    { id: 1, value: "Dhaka" },
+    { id: 2, value: "Chittagong" },
+    { id: 3, value: "Rajshahi" },
+    { id: 4, value: "Khulna" },
+    { id: 5, value: "Barisal" },
+    { id: 6, value: "Sylhet" },
   ];
 
   const cars1 = [
@@ -109,11 +105,13 @@ const Signup = () => {
     { id: 4, value: "Toyota" },
   ];
 
-  const [personName, setPersonName] = useState(getLocalStorage());
+  const [personName, setPersonName] = useState(getLocalStorage() && ["Dhaka"]);
   const [selectValue, setSelectValue] = useState(getLocalStorage());
 
   useEffect(() => {
-    localStorage.setItem("list", JSON.stringify(personName));
+    if (personName != null)
+      localStorage.setItem("list", JSON.stringify(personName));
+    // else localStorage.setItem("list", JSON.stringify("Oliver Hansen"));
   }, [personName]);
 
   const handleChange = (event) => {
@@ -180,10 +178,16 @@ const Signup = () => {
               >
                 {names.map((name1) => (
                   <MenuItem key={name1.id} value={name1.value}>
-                    <Checkbox checked={personName.indexOf(name1.value) > -1} />
+                    <Checkbox
+                      checked={
+                        personName.indexOf(name1.value) > -1
+                        // || names[0].value
+                      }
+                    />
                     <ListItemText primary={name1.value} />
                   </MenuItem>
                 ))}
+                {console.log(personName)}
               </Select>
               <div className="text-center">
                 <button className="btn btn-dark mt-3 " type="submit">
@@ -197,7 +201,7 @@ const Signup = () => {
           </div>
         }
       </Formik>
-      <label for="cars">Choose a car:</label>
+      {/* <label for="cars">Choose a car:</label> */}
 
       {/* <select
         className="my-3"
