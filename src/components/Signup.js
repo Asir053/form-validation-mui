@@ -105,13 +105,13 @@ const Signup = () => {
     { id: 4, value: "Toyota" },
   ];
 
-  const [personName, setPersonName] = useState(getLocalStorage() && ["Dhaka"]);
+  const [personName, setPersonName] = useState(getLocalStorage());
   const [selectValue, setSelectValue] = useState(getLocalStorage());
 
   useEffect(() => {
-    if (personName != null)
+    if (getLocalStorage() != [])
       localStorage.setItem("list", JSON.stringify(personName));
-    // else localStorage.setItem("list", JSON.stringify("Oliver Hansen"));
+    else localStorage.setItem("list", ["Dhaka", "Khulna"]);
   }, [personName]);
 
   const handleChange = (event) => {
